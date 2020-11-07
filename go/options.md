@@ -1,6 +1,7 @@
-# option 模式的两种写法
+### option 模式的两种写法
 
-## 1. 
+#### 1.
+
 ```go
 type Options struct {
     ServiceName string
@@ -24,7 +25,10 @@ func NewService(opts ...Option) {
 }
 ```
 
-## 2.
+
+
+#### 2.
+
 ```go
 type Service struct {
     ServiceName string
@@ -55,3 +59,4 @@ func NewService(opts ...ServiceOption) *Service {
 }
 
 ```
+
