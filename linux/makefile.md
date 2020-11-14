@@ -9,14 +9,17 @@ IMAGE_NAME=hoo/$(BUILD_NAME)
 IMAGE_TAG=$(GIT_TAG)-$(GIT_COMMIT)
 OUTPUT_PATH=./bin
 GOPATH=$(shell go env GOPATH)
+BUILD_FLAGS=-ldflags="-s -w ${LDFLAGS}" -tags=dev
 
 all: build
 
 run: build
-	$(OUTPUT_PATH)/$(BUILD_NAME) -conf=./configs -log.dir=./log
+	$(OUTPUT_PATH)/$(BUILD_NAME) -conf=./configs \
+	-log.dir=./log \
+	-appid=hoootc
 
 build:
-	go build -ldflags="-s -w ${LDFLAGS}" -o $(OUTPUT_PATH)/$(BUILD_NAME) cmd/main.go
+	go build $(BUILD_FLAGS) -o $(OUTPUT_PATH)/$(BUILD_NAME) cmd/main.go
 
 docker:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
@@ -33,22 +36,34 @@ test: vet
 clean:
 	rm -rf $(OUTPUT_PATH)
 
-
-PROTO_COMMAND = protoc --proto_path=. \
-               	--proto_path=$(shell  go list -f "{{.Dir}}" -m github.com/go-kratos/kratos)/third_party \
-               	--proto_path=${GOPATH}/src
+define protoc
+ protoc --proto_path=. \
+        --proto_path=$(shell  go list -f "{{.Dir}}" -m github.com/go-kratos/kratos)/third_party \
+        --proto_path=${GOPATH}/src
+endef
 
 proto:
-	$(PROTO_COMMAND) --bm_out=. \
-	--gofast_out=plugins=grpc:. \
+	$(protoc) --bm_out=. \
+	--gofast_out=Mgoogle/api/annotations.proto=github.com/golang/protobuf/ptypes/any,plugins=grpc:. \
 	--gofast_opt=paths=source_relative \
 	api/api.proto
 
-
 swagger:
-	$(PROTO_COMMAND) --bswagger_out=:. api/api.proto
+	$(protoc) --bswagger_out=:. api/api.proto
 
 .PHONY: run build clean vet test docker gen proto
 
+
+run=true
+let:
+	$(warning fuck this)
+	$(error fuck this)
+ifeq ($(run), true)
+	echo run
+else
+	echo no run
+endif
+
 ```
+
 

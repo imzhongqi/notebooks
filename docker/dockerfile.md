@@ -1,4 +1,4 @@
-### 构建 go alpine 镜像
+构建 go alpine 镜像
 
 ```dockerfile
 FROM alpine:3.12.1 as builder

@@ -22,3 +22,48 @@ EOF
 
 
 
+#### ssh 端口转发
+
+```sh
+Host database
+    HostName db.example.com
+    LocalForward 3306 localhost:9999
+    RemoteForward 6999 localhost:8080
+```
+
+```
+ssh database
+```
+
+将会在监听本地的 3306 端口，然后将所有的流量转发到远程服务器的 9999 端口上
+
+
+
+#### 多共享连接：
+
+```
+ControlMaster auto
+ControlPath /tmp/%r@%h:%p
+```
+
+
+
+#### 禁用密码登录
+
+```
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+```
+
+
+
+#### ssh 参数
+
+| arg  | description |
+| ---- | ----------- |
+| -q   |             |
+| -N   |             |
+| -f   |             |
+| -L   |             |
+| -R   | 反向代理    |
+

@@ -15,7 +15,7 @@
 | OFS  | the output field separator, a space by default. |
 | ORS  | the output record separator, by default a newline |
 | PREC | the working precision of arbitrary precision floating-point numbers, 53 by default. 浮点数精度，默认53 |
-| SYMTAB | 全局变量数组，delete 对其无效 |  
+| SYMTAB | 全局变量数组，delete 对其无效 |
 
 
 **Variables, Records and Fields**
