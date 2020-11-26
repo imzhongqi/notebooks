@@ -22,6 +22,15 @@ EOF
 
 
 
+```config
+Host gitlab.com github.com
+    ProxyCommand eval 'nc -z 127.0.0.1 1081 2> /dev/null && nc -x 127.0.0.1:1081 %h %p || nc %h %p'
+```
+
+
+
+
+
 #### ssh 端口转发
 
 如果需要绑定 0.0.0.0 的 ip， 需要配置 `/etc/ssh/sshd_config` ，否则只能绑定回环地址。
@@ -43,11 +52,13 @@ Host database
 ssh database
 ```
 
-将会在监听本地的 3306 端口，然后将所有的流量转发到远程服务器的 9999 端口上
+打开本地 3306 端口，转发到远程的 localhost:9999 上去，打开远程的 6999端口，转发到本地的 8080 端口上去。
 
 
 
 #### 多共享连接：
+
+`~/.ssh/config`
 
 ```
 ControlMaster auto
@@ -57,6 +68,8 @@ ControlPath /tmp/%r@%h:%p
 
 
 #### 禁用密码登录
+
+`/etc/ssh/sshd_config`
 
 ```
 PasswordAuthentication no
@@ -91,8 +104,8 @@ ClientAliveInterval 180
 | -N   | 不执行远程命令（转梦做端口转发）                             |
 | -f   | 登录成功后即转为后台任务执行                                 |
 | -n   | 重定向 stdin 为 `/dev/null`, 用于配合 -f 后台任务            |
-| -L   |                                                              |
-| -R   | 反向代理                                                     |
+| -L   | LocalForward                                                 |
+| -R   | RemoteForward                                                |
 
 
 
