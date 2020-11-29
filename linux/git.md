@@ -65,6 +65,16 @@ git checkout -b newbranch   # 从当前的分支创建一个 newbranch，并 che
 
 
 
+**git ssh debugging**
+
+```
+GIT_SSH_COMMAND="ssh -vvv" git clone git@github.com:imzhongqi/dotfiles
+```
+
+
+
+
+
 相关文章：
 
 https://deepzz.com/post/git-commands.html

@@ -1,8 +1,15 @@
-## ssh 
+ssh 
 
 #### ssh 使用代理
 
 ssh 怎么使用代理一直是我很头疼的事情，因为我发现我在命令行下设置 `http_proxy/https_proxy` 亦或者设置 `all_proxy` 环境变量对 git 的 ssh 无效，可以通过下面的设置来使用代理。
+
+**ssh 相关配置文件**：
+
+-   ~/.ssh/config   ` 用户配置文件`
+-   /etc/ssh/ssh_config    `系统配置文件`
+
+
 
 `~/.ssh/config` ：
 
@@ -26,8 +33,6 @@ EOF
 Host gitlab.com github.com
     ProxyCommand eval 'nc -z 127.0.0.1 1081 2> /dev/null && nc -x 127.0.0.1:1081 %h %p || nc %h %p'
 ```
-
-
 
 
 
@@ -106,8 +111,9 @@ ClientAliveInterval 180
 | -n   | 重定向 stdin 为 `/dev/null`, 用于配合 -f 后台任务            |
 | -L   | LocalForward                                                 |
 | -R   | RemoteForward                                                |
+| -D   | DynamicForward                                               |
 
-
+更多的配置请阅读`$ man ssh_config` 文档。
 
 
 
@@ -122,6 +128,13 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub server
 ```
 PermitRootLogin no
 PasswordAuthentication no
+```
+
+
+
+```
+ StrictHostKeyChecking no
+ UserKnownHostsFile /dev/null
 ```
 
 
