@@ -63,7 +63,6 @@ clean:
 	#rm -rf $(OUTPUT_PATH)
 
 .PHONY: run build clean vet test docker gen proto
-
 ```
 
 
