@@ -150,3 +150,4 @@
 - swapon
 - eval
 - exec
+- sshfs
