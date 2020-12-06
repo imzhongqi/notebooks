@@ -229,8 +229,8 @@ echo $local_variable # $local_variable == ''
 
 ```sh
 # getopts.sh
-while getopts 'abcde:fgh' opt; do # abcdfgh 是无参数的 flag，e 是有参数的 flag
-  case $opt in
+while getopts 'abcde:fgh' OPT; do # abcdfgh 是无参数的 flag，e 是有参数的 flag
+  case $OPT in
     a)
       echo "flag a is true"
       ;;
