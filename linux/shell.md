@@ -78,8 +78,13 @@ fi
 
 ## until 语句
 
-```sh
+直到条件为真时 break，与 `while` 相反
 
+```sh
+a=0
+until (( a >= 10 )); do
+	echo $((a++))
+done
 ```
 
 ## for 语句
