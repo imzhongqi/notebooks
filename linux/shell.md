@@ -51,6 +51,16 @@ $ echo $((16#f)) # 15, 二进制的 `1111` 转换为 10 进制
 echo 'scale=3; 1/3' | bc # output: .333
 ```
 
+#### C Style operations
+
+```sh
+a=100
+((b = a > 100 ? 200 : 50))
+echo $b # 50
+```
+
+[运算符](https://tldp.org/LDP/abs/html/opprecedence.html)
+
 ## if 语句
 
 ```sh
@@ -181,6 +191,8 @@ sleep10000
 
 ## 变量
 
+[变量声明](https://tldp.org/LDP/abs/html/declareref.html)
+
 ```sh
 local -a arr # 声明一个类型为 array 的变量
 typeset -A arr = (
@@ -197,6 +209,12 @@ say_hello() {
 
 say_hello # hello, guest
 say_hello skywalker # hello, skywalker
+
+
+echo ${var:-'default val'} # if var is null or unset, echo 'default val'
+echo ${var:='default val'} # if var is null or unset, var is set to the value of default val
+echo ${var:?'error msg'}   # if var is null or unset, will print error msg
+echo ${var:+'set'}   # if var is set, echo 'set'
 ```
 
 **函数(方法、命令)**
@@ -228,6 +246,15 @@ function d e f () {
 echo $local_variable # $local_variable == ''
 ```
 
+**生成随机数**
+
+```sh
+echo $RANDOM
+
+# 固定范围内的随机数
+echo $(($RANDOM % 10)) # 10 以内的随机数
+```
+
 ## 脚本选项
 
 简单脚本的选项可以通过 `getopts` 来获取
@@ -254,6 +281,67 @@ while getopts 'abcde:fgh' OPT; do # abcdfgh 是无参数的 flag，e 是有参�
   esac
 done
 ```
+
+## string operations
+
+```sh
+string="hello,world"
+echo ${#string} # 11, length of variable string
+echo ${string:5} # world
+echo ${string:0:5} # hello
+
+echo ${string#hello} # ,world ${string#substring} 从前面匹配字符串
+echo ${string%world} # hello, ${string%substring} 从后面匹配字符串
+
+```
+
+## awk
+
+```awk
+# awk.sh
+
+BEGIN {
+	# FS: regular expression used to separate fields
+	# NF: number of fields in the current record
+	# NR: ordinal number of current record
+	# RS: input record separator
+	# FNR: ordinal number of the current record in the current file
+	# OFS: output record separator
+
+	FS=":"
+	print "hello,world"
+}
+
+{
+	print "$1: " $1
+}
+
+{
+	print "\$2: " $2
+}
+
+END {
+	print "end"
+}
+```
+
+```sh
+$ cat /etc/passwd | awk -f awk.sh
+```
+
+## signals
+
+> `kill -l` 列出支持的所有信号
+
+| Signal  | Name | Signal Number Description                                                                           |
+| ------- | ---- | --------------------------------------------------------------------------------------------------- |
+| SIGHUP  | 1    | Hang up detected on controlling terminal or death of controlling process                            |
+| SIGINT  | 2    | Issued if the user sends an interrupt signal (Ctrl + C)                                             |
+| SIGQUIT | 3    | Issued if the user sends a quit signal (Ctrl + D)                                                   |
+| SIGFPE  | 8    | Issued if an illegal mathematical operation is attempted                                            |
+| SIGKILL | 9    | If a process gets this signal it must quit immediately and will not perform any clean-up operations |
+| SIGALRM | 14   | Alarm clock signal (used for timers)                                                                |
+| SIGTERM | 15   | Software termination signal (sent by kill by default)                                               |
 
 ## 相关文章
 
