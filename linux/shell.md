@@ -56,23 +56,23 @@ echo 'scale=3; 1/3' | bc # output: .333
 ```sh
 a=20
 if (( $a >= 20 )); then
-	echo "a greater than 20"
+  echo "a greater than 20"
 fi
 # output: a greater than 20
 
 name="guest"
 if [[ "$1" == "" ]]; then
-	name="$1"
+  name="$1"
 fi
 echo $name
 
 opt=1
 if [[ $opt == 1 ]]; then
-	echo "opt is 1"
+  echo "opt is 1"
 elif [[ $opt == 2 ]]; then
-	echo "opt is 2"
+  echo "opt is 2"
 else
-	echo "else case"
+  echo "else case"
 fi
 ```
 
@@ -86,18 +86,18 @@ fi
 
 ```sh
 for ((i=0; i<10; i++)); do
-	echo "index: $i"
+  echo "index: $i"
 done
 # output: 0 1 2 3 4 5 6 7 8 9
 
 
 for i in {1..10..2}; do
-	echo "index: $i"
+  echo "index: $i"
 done
 # output: 1 3 5 7 9
 
 for i in `seq 1 2 10`; do
-	echo "index: $i"
+  echo "index: $i"
 done
 # output: 1 3 5 7 9
 ```
@@ -107,14 +107,14 @@ done
 ```sh
 a=0
 while [ $a -lt 10]; do
-	echo $a
-	((a++))
+  echo $a
+  ((a++))
 done
 
 line_num=0
 cat /etc/passwd | while read line; do # 利用 read 会读取 '\n' 特性，来一次读取一行
-	((line_num++))
-	printf "%3s: %s\n" $line_num $line
+  ((line_num++))
+  printf "%3s: %s\n" $line_num $line
 done
 ```
 
@@ -122,18 +122,18 @@ done
 
 ```sh
 case $1 in
-	a)       # 接受 a
-		echo "a"
-		;;
-	b|c)     # 接受 b 或 c
-		echo "b or c"
-		;;
-	?)       # 接受任意一个字符
-		echo "chat default case"
-		;;
-	*)       # 接受任意的字符或字符串
-		echo "default case"
-		;;
+  a)       # 接受 a
+    echo "a"
+    ;;
+  b|c)     # 接受 b 或 c
+    echo "b or c"
+    ;;
+  ?)       # 接受任意一个字符
+    echo "chat default case"
+    ;;
+  *)       # 接受任意的字符或字符串
+    echo "default case"
+    ;;
 esac
 ```
 
@@ -143,24 +143,24 @@ esac
 
 ```sh
 cat <<EOF
-	START
-	1
-	2
-	3
-	4
-	5
-	END
+  START
+  1
+  2
+  3
+  4
+  5
+  END
 EOF
 
 # 忽略前面的空格
 cat <<-EOF
-	START
-	1
-	2
-	3
-	4
-	5
-	END
+  START
+  1
+  2
+  3
+  4
+  5
+  END
 EOF
 ```
 
@@ -179,7 +179,7 @@ sleep10000
 ```sh
 local -a arr # 声明一个类型为 array 的变量
 typeset -A arr = (
-	name
+  name
 )
 ```
 
@@ -187,7 +187,7 @@ typeset -A arr = (
 
 ```sh
 say_hello() {
-	echo "hello, ${1:-'guest'}"
+  echo "hello, ${1:-'guest'}"
 }
 
 say_hello # hello, guest
@@ -198,27 +198,27 @@ say_hello skywalker # hello, skywalker
 
 ```sh
 cmd() {
-	echo "cmd function"
+  echo "cmd function"
 }
 
 function cmd2() {
-	echo "cmd2"
+  echo "cmd2"
 }
 
 # 同时定义多个函数
 a b c () {
-	echo "$0 function"
+  echo "$0 function"
 }
 
 function d e f () {
-	echo "this is $0 function"
+  echo "this is $0 function"
 }
 
 # 立刻执行的函数，可产生作用域，可以使用 local 来声明变量
 () {
-	local local_variable="hello"
-	echo "local variable: $local_variable"
-	echo "this is the immediate execution function"
+  local local_variable="hello"
+  echo "local variable: $local_variable"
+  echo "this is the immediate execution function"
 }
 echo $local_variable # $local_variable == ''
 ```
@@ -230,23 +230,23 @@ echo $local_variable # $local_variable == ''
 ```sh
 # getopts.sh
 while getopts 'abcde:fgh' opt; do # abcdfgh 是无参数的 flag，e 是有参数的 flag
-	case $opt in
-		a)
-			echo "flag a is true"
-			;;
-		b)
-			echo "flag b is true"
-			;;
-		c|d)
-			echo "flag c or d is true"
-			;;
-		e)
-			echo "e flag is enable, value is: $OPTARG"
-			;;
-		*)
-			echo "other flag"
-			;;
-	esac
+  case $opt in
+    a)
+      echo "flag a is true"
+      ;;
+    b)
+      echo "flag b is true"
+      ;;
+    c|d)
+      echo "flag c or d is true"
+      ;;
+    e)
+      echo "e flag is enable, value is: $OPTARG"
+      ;;
+    *)
+      echo "other flag"
+      ;;
+  esac
 done
 ```
 
