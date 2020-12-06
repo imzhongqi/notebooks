@@ -10,7 +10,7 @@ IMAGE_TAG = $(GIT_TAG)-$(GIT_COMMIT)
 OUTPUT_PATH = ./dist
 GOPATH = $(shell go env GOPATH)
 BUILD_FLAGS = -ldflags="-s -w ${LDFLAGS}"
-protobuf = api/api.pb.go api/api.bm.go
+protobuf = api/api.pb.go api/api.bm.go api/internal.pb.go
 
 ifeq ($(DEV), true)
 	BUILD_FLAGS += -tags=dev
@@ -45,13 +45,16 @@ PROTOC_FLAGS = --proto_path=. \
 
 define PROTOC
 	@echo build proto...
-	@protoc $(PROTOC_FLAGS) --bm_out=. \
+	protoc $(PROTOC_FLAGS) --bm_out=. \
 	--gofast_out=plugins=grpc:. \
 	--gofast_opt=paths=source_relative
 endef
 
-$(protobuf): api/api.proto
-	$(PROTOC) api/api.proto
+api/internal.pb.go: api/internal.proto
+	protoc $(PROTOC_FLAGS) --gofast_out=. --gofast_opt=paths=source_relative $<
+
+api/api.pb.go api/api.bm.go: api/api.proto
+	$(PROTOC) $?
 
 proto:
 	$(PROTOC) api/api.proto
@@ -63,6 +66,7 @@ clean:
 	#rm -rf $(OUTPUT_PATH)
 
 .PHONY: run build clean vet test docker gen proto
+
 ```
 
 
