@@ -17,7 +17,8 @@
 
 ```sh
 $ a=0
-$ ((a++)) # 1
+$ ((a++))
+$ echo $a # 1
 
 $ let b++       # let 如果一个变量不存在的话，默认将是 0
 $ echo $b # 1
@@ -131,6 +132,19 @@ cat /etc/passwd | while read line; do # 利用 read 会读取 '\n' 特性，来�
     ((line_num++))
     printf "%3s: %s\n" $line_num $line
 done
+
+while read  des what mask iface; do
+  echo $des $what $mask $iface
+done < <(route -n)
+#     ^ ^
+#     1 2
+# 1. 重定向
+# 2. process substitution (相当于创建了一个文件，文件重定向到了 stdin)
+
+route -n > a.txt
+while read dst what mask iface; do
+  echo $des $what $mask $iface
+done < a.txt
 ```
 
 ## switch（case）语句
@@ -293,6 +307,24 @@ echo ${string:0:5} # hello
 echo ${string#hello} # ,world ${string#substring} 从前面匹配字符串
 echo ${string%world} # hello, ${string%substring} 从后面匹配字符串
 
+```
+
+## arrays
+
+```sh
+arr=(one two three four five five)
+echo "arr length: ${#arr[@]}"
+echo "arr first element: ${arr[1]}"
+echo "arr 1-length: ${arr[@]:1}"
+echo "arr 2-3: ${arr[@]:2:3}"
+
+echo ${arr[@]#f*r} # one two three five five; remove four
+echo ${arr[@]##t*e} # one two four five five; long match, remove three
+echo ${arr[@]/fiv*/foo} # one two three four foo foo
+echo ${arr[@]//iv/} # one two three four fe fe
+
+local -a arr=( one two three four '...' )
+declare -a before=( one thw three four '...' )
 ```
 
 ## awk
