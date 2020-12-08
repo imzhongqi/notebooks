@@ -191,6 +191,18 @@ cat <<-EOF
   5
   END
 EOF
+
+
+$ str="hello,world"
+$ echo $str | cat
+
+# bad
+$ cat < $str
+
+# good
+$ cat <<< $str
+
+$ base64 -d <<< aGVsbG8K
 ```
 
 ## linux 查看进程 pid
@@ -325,6 +337,8 @@ echo ${arr[@]//iv/} # one two three four fe fe
 
 local -a arr=( one two three four '...' )
 declare -a before=( one thw three four '...' )
+integer # int 类型
+float # float 类型
 ```
 
 ## awk
