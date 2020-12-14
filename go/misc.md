@@ -95,3 +95,9 @@ go clean --modcache
 go list -m -json -versions github.com/gin-gonic/gin
 ```
 
+
+
+```
+GODEBUG=gctrace=1
+```
+

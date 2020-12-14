@@ -73,6 +73,12 @@ GIT_SSH_COMMAND="ssh -vvv" git clone git@github.com:imzhongqi/dotfiles
 
 
 
+**不使用 .gitignore 忽略文件，仅在本地生效**
+
+```
+echo "exclude_file" >> .git/info/exclude
+```
+
 
 
 相关文章：

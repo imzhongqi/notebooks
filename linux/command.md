@@ -1,17 +1,17 @@
 # linux 常用命令
 
-- lsof
-- ss
-- netstat
-- top
-- ps
+- **lsof**
+- **ss**
+- **netstat**
+- **top**
+- **ps**
 - cut
-- grep
-- awk
-- sed
-- find
+- **grep**
+- **awk**
+- **sed**
+- **find**
 - scp
-- tr
+- **tr**
 - chsh
 - curl
 - wget
@@ -58,7 +58,7 @@
 - ssh-keygen
 - ssh-keyscan
 - stat
-- stow
+- **stow**
 - strace
 - strip
 - sum
@@ -150,4 +150,6 @@
 - swapon
 - eval
 - exec
-- sshfs
+- **sshfs**
+- **dtrace**
+- **ngrep*** 

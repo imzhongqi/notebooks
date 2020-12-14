@@ -11,6 +11,15 @@
 | $0       | 在脚本中表示当前脚本的文件名                                               |
 | $n       | 获取脚本的第 n 个参数                                                      |
 
+
+
+```sh
+set -eu
+set -o xtrace
+```
+
+
+
 ## 运算
 
 #### 对某个数字加一
@@ -389,8 +398,21 @@ $ cat /etc/passwd | awk -f awk.sh
 | SIGALRM | 14   | Alarm clock signal (used for timers)                                                                |
 | SIGTERM | 15   | Software termination signal (sent by kill by default)                                               |
 
+
+
+##  `exec`
+
+```sh
+exec 2>stderr.log # 将当前的标准错误重定向到 stderr.log 文件中
+```
+
+
+
+
+
 ## 相关文章
 
 [advanced bash script guide](https://tldp.org/LDP/abs/html/index.html)  
 [unix special variable](https://www.tutorialspoint.com/unix/unix-special-variables.htm)  
 [numeric operators](https://tinylab.gitbooks.io/shellbook/content/zh/chapters/01-chapter2.html)
+
