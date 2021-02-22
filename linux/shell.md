@@ -96,6 +96,13 @@ else
 fi
 ```
 
+```sh
+a=10
+if [[ $a =~ "[0-9]" ]]; then
+    echo "ok"
+fi
+```
+
 ## until 语句
 
 直到条件为真时 break，与 `while` 相反
