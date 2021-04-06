@@ -355,6 +355,13 @@ local -a arr=( one two three four '...' )
 declare -a before=( one thw three four '...' )
 integer # int 类型
 float # float 类型
+
+# bash
+str='a b c d e f'
+IFS=' '
+str_arr=($str)
+echo ${str_arr[3]}
+
 ```
 
 ## awk

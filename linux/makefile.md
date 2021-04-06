@@ -70,3 +70,35 @@ clean:
 ```
 
 
+
+
+
+### Makefile 笔记
+
+makefile 的规则：
+
+```makefile
+target ...: prerequisites ...
+	command
+	...
+```
+
+target 可以是一个目标文件
+
+prerequisites 是 一系列为了创建 target 而需要的资源
+
+command 是任意的 shell 命令
+
+
+
+
+
+比如说编译一个可执行的文件
+
+```
+cmd: cmd.go
+	go build -o $@ $< 
+# $@ 表示 cmd
+@ $< 表示 cmd.go
+```
+
