@@ -466,6 +466,17 @@ $ cat /etc/passwd | awk -f awk.sh
 
 
 
+**shell 脚本捕获信号做处理**
+
+```shell
+trap 'echo exit' SIGHUP SIGINT SIGTERM
+sleep 10
+```
+
+​		在 shell 脚本中执行上述代码，然后按下 `C-c` ，trap 会接收到 `SIGINT` 信号，然后执行预设的代码。
+
+
+
 **判断一个命令是否存在**
 
 ```

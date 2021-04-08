@@ -157,3 +157,7 @@ function myfunc() {
 awk 'function myfn() {print "myfn called"} BEGIN{ fn="myfn"; @fn() }'
 ```
 
+```shell
+awk '{ print toupper($1) }' <<< hello # HELLO
+```
+
