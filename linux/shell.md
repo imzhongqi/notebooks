@@ -340,7 +340,9 @@ echo $local_variable # $local_variable == ''
 echo $RANDOM
 
 # 固定范围内的随机数
-echo $(($RANDOM % 10)) # 10 以内的随机数
+echo $(( RANDOM % 10 )) # 10 以内的随机数
+
+shuf -i 1-100000 -n 1 # 也是一个生成随机数的方案
 ```
 
 ## 脚本选项
