@@ -66,6 +66,35 @@ exec 2>stderr.log # 将当前的标准错误重定向到 stderr.log 文件中
 
 
 
+### 注释
+
+​		shell 最基础的就是注释了，注释一般分为两种，单行注释和多行注释：
+
+```shell
+# this is single line comment
+
+# multi comment
+: '
+	this is multi line comment.
+	this is comment,
+	comment
+'
+
+: <<!
+	comment
+!
+
+if false; then
+	comment
+	comment
+	comment
+fi
+```
+
+注意⚠️，其实 shell 没有多行注释的，我们只是利用一个什么都不做的命令 `:` ，来伪装一个多行注释罢了，多种多行注释其本质都大同小异，要么就是利用 shell 是解释的特性。
+
+
+
 ## 运算
 
 #### 对某个数字加一
@@ -117,6 +146,8 @@ echo $b # 50
 
 [运算符](https://tldp.org/LDP/abs/html/opprecedence.html)
 
+
+
 ## if 语句
 
 ```sh
@@ -149,6 +180,8 @@ if [[ "$a" =~ [0-9] ]]; then # 注意，[0-9]，在 bash 下不要写成 [[ $a =
 fi
 ```
 
+
+
 ## until 语句
 
 直到条件为真时 break，与 `while` 相反
@@ -159,6 +192,8 @@ until (( a >= 10 )); do
     echo $((a++))
 done
 ```
+
+
 
 ## for 语句
 
@@ -179,6 +214,8 @@ for i in `seq 1 2 10`; do
 done
 # output: 1 3 5 7 9
 ```
+
+
 
 ## while 语句
 
@@ -404,6 +441,13 @@ declare -a before=( one thw three four '...' )
 integer # int 类型
 float # float 类型
 
+
+# bash version must be greater than 4.0
+declare -A kvs=( [key]=value [key1]=value1 )
+for key in ${!kvs[@]}; do # ${!kvs[@]} 获取 kvs 的所有 key
+	echo "${key}: ${kvs[$key]}"
+done
+
 # bash
 str='a b c d e f'
 IFS=' '
@@ -488,6 +532,33 @@ if check_cmd ping; then
 	echo "ping command exist"
 fi
 ```
+
+
+
+**完美按行读取文件方式**
+
+​		使用 `while read` 来读取文件行，总还是有缺陷的，如果文件的最后一行没有一个独立的换行符`\n`，那么 `read` 会无法读取最后一行；完美的解决方案如下：
+
+```shell
+IFS=$'\n' # 将 internal field separate 设置为换行，如果直接 IFS='\n' 或者 IFS="\n" 不管用的，不过这是 bash 独有的语法，如果需要兼容，可以使用下一个方式。
+IFS=$(echo -e '\n') # -e encoding，可以用来翻译类似 '\x123' 这种字符串。
+for line in $(<file.txt); do
+    echo $line
+done
+```
+
+关于 `$'n'`，更多可以看 [这里](https://stackoverflow.com/questions/4128235/what-is-the-exact-meaning-of-ifs-n)。
+
+
+
+**获取行数或者列数**
+
+```
+cat file | awk '{print NR}' # 总行数
+head -n 1 | awk '{print NF}' # 列数
+```
+
+
 
 
 
