@@ -554,13 +554,9 @@ done
 **获取行数或者列数**
 
 ```
-cat file | awk '{print NR}' # 总行数
+wc -l file | awk '{print $1}' # 总行数，wc 有个问题，最后一行没有换行符，就会导致计算少一行
 head -n 1 | awk '{print NF}' # 列数
 ```
-
-
-
-
 
 
 
