@@ -171,6 +171,20 @@ elif [[ $opt == 2 ]]; then
 else
     echo "else case"
 fi
+
+check_cmd() {
+  command -v "$1" > /dev/null 2>&1
+}
+
+# 检查 docker 是否安装。
+if check_cmd docker; then
+	echo "docker installed."
+fi
+
+if ! check_cmd docker; then 
+	echo "docker not installed."
+fi
+
 ```
 
 ```sh
@@ -445,7 +459,7 @@ float # float 类型
 # bash version must be greater than 4.0
 declare -A kvs=( [key]=value [key1]=value1 )
 for key in ${!kvs[@]}; do # ${!kvs[@]} 获取 kvs 的所有 key
-	echo "${key}: ${kvs[$key]}"
+	echo "${key}: ${kvs[$key]}" # ${kvs[key]} 好像都可以，这就很难受了，加 $ 还是不加，很难受的。
 done
 
 # bash
@@ -457,6 +471,16 @@ echo ${str_arr[3]}
 # join
 IFS=':'
 echo "${a[*]}" # 
+
+# 将一个数组赋值给另外一个变量
+arr=(1 2 3)
+arr1=$arr # Bad
+arr2=( ${arr[@]}) # Good，注意要要使用括号
+
+# 将 "$@" 赋值给变量
+params=$@ # Bad
+params=( $@ ) # Good，注意要要使用括号
+
 
 ```
 
@@ -557,6 +581,16 @@ done
 wc -l file | awk '{print $1}' # 总行数，wc 有个问题，最后一行没有换行符，就会导致计算少一行
 head -n 1 | awk '{print NF}' # 列数
 ```
+
+
+
+**仅显示当前目录下的所有目录**
+
+```shell
+ls -F | grep '/$' | sed 's#/##g'
+```
+
+
 
 
 

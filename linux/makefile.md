@@ -102,3 +102,11 @@ cmd: cmd.go
 @ $< 表示 cmd.go
 ```
 
+
+
+**最终执行的目标**
+
+```
+install:
+	echo $(MAKECMDGOALS)
+```

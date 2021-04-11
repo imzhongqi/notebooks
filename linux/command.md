@@ -254,13 +254,13 @@ ss -nt
 
 
 
-**df**
+**df(display free)**
 
 显示磁盘信息
 
 
 
-**du**
+**du(display usage)**
 
-查看大小的
+ 查看大小的
 
