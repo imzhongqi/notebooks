@@ -71,6 +71,16 @@ clean:
 
 
 
+$@：目标的名字
+
+$^：构造所需文件列表所有所有文件的名字
+
+$<：构造所需文件列表的第一个文件的名字
+
+$?：构造所需文件列表中更新过的文件
+
+$*:  获取通配符匹配的值
+
 
 
 ### Makefile 笔记
@@ -110,3 +120,17 @@ cmd: cmd.go
 install:
 	echo $(MAKECMDGOALS)
 ```
+
+
+
+```makefile
+BUILD = go build
+
+debug-%: BUILD += -gcflags="all=-N -l"
+# go build -gcflags="all=-N -l" main.go
+debug-web:
+	$(BUILD) main.go
+
+.PHONY: debug-*
+```
+
