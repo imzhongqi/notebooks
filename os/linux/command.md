@@ -1,161 +1,320 @@
 # linux 常用命令
 
 - **lsof**
+
 - **ss**
+
 - **netstat**
+
 - **top**
+
 - **ps**
+
 - cut
+
 - **grep**
+
 - **awk**
+
 - **sed**
+
 - **find**
+
 - scp
+
 - **tr**
+
 - chsh
+
 - curl
+
 - wget
+
 - diff
+
 - dig
+
 - du
+
 - env
+
 - file
+
 - free
+
 - getopt
+
 - id
+
 - iconv
+
 - info
+
 - install
+
 - json_pp
+
 - jsondiff
+
 - killall
+
 - last
+
 - lastlog
+
 - locale
+
 - lsb_release
+
 - lscpu
+
 - make
+
 - man
+
 - mdig
+
 - printf
+
 - rsync
+
 - seq
+
 - sdiff
+
 - sftp
+
 - sha1sum
+
 - sha224sum
+
 - sha265sum
+
 - shasum
+
 - size
+
 - sort
+
 - split
+
 - ssh
+
 - ssh-add
+
 - ssh-agent
+
 - ssh-copy-id
+
 - ssh-import-id-gh
+
 - ssh-import-id-lp
+
 - ssh-keygen
+
 - ssh-keyscan
+
 - stat
+
 - **stow**
+
 - strace
+
 - strip
+
 - sum
+
 - tail
+
 - tee
+
 - time
+
 - tmux
+
 - timeout
+
 - tty
+
 - uniq
+
 - unlink
+
 - w
+
 - wall
+
 - watch
+
 - wc
+
 - whatis
+
 - whereis
+
 - which
+
 - who
+
 - whoami
+
 - wifi-status
+
 - www-browser
+
 - X11
+
 - xargs
+
 - xauth
+
 - xkill
+
 - xprop
+
 - xz
+
 - xxd
+
 - xzdiff
+
 - xzgrep
+
 - xzless
+
 - xzmore
+
 - zdump
+
 - zipgrep
+
 - zipinfo
+
 - yes
+
 - rgrep
+
 - egrep
+
 - ip
+
 - init
+
 - halt
+
 - mount
+
 - bzcat
+
 - cat
+
 - chmod
+
 - chown
+
 - cp
+
 - date
+
 - dd
+
 - df
+
 - dir
+
 - echo
+
 - false
+
 - fgrep
+
 - less
+
 - ln
+
 - ls
+
 - mkdir
+
 - more
+
 - mv
+
 - nc
+
 - ping
+
 - pwd
+
 - rm
+
 - rmdir
+
 - read
+
 - sleep
+
 - su
+
 - sync
+
 - tar
+
 - touch
+
 - true
+
 - umount
+
 - uname
+
 - zcat
+
 - zcmp
+
 - zdiff
+
 - zegrep
+
 - zfgrep
+
 - zgrep
+
 - zless
+
 - zmore
+
 - znew
+
 - mkfifo
+
 - ip
+
 - route
+
 - swapoff
+
 - swapon
+
 - eval
+
 - exec
+
 - **sshfs**
+
 - **dtrace**
+
 - **ngrep**
+
 - slabtop
 
+- vmstat
 
+- strace
+
+- atop
+
+  
 
 #### 命令行小技巧
 

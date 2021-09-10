@@ -1,5 +1,3 @@
-ssh 
-
 #### ssh 使用代理
 
 ssh 怎么使用代理一直是我很头疼的事情，因为我发现我在命令行下设置 `http_proxy/https_proxy` 亦或者设置 `all_proxy` 环境变量对 git 的 ssh 无效，可以通过下面的设置来使用代理。
@@ -141,6 +139,58 @@ PasswordAuthentication no
 
 
 
+### ssh 高级教程
+
+**add tunnel devices**
+
+```
+iip tuntap add dev tun0 mode tun user $USER
+```
+
+**clean tunnel devices**
+
+```
+ip tuntap del dev tun0 mode tun
+```
+
+```
+ip route add xxxxxxxx via dev tun0
+ip tuntap add dev tun0 mode xxx
+```
+
+On server side
+
+```
+vi /etc/ssh/sshd_config
+```
+
+```
+...
+PermitTunnel yes
+...
+```
+
+```shell
+ssh -w 0:0 ${USER}@${REMOTE_HOST}
+```
+
+```
+iptables -I FORWARD -j ACCEPT
+iptables -t nat -I POSTROUTING -s ${TUNNEL_DEVICE_IP} -j MASQUERADE
+```
+
+**DEBUG**
+
+```
+tcpdump -i tun0
+```
+
+
+
+
+
+
+
 相关文章：
 
 https://cherrot.com/tech/2017/01/08/ssh-tunneling-practice.html
@@ -150,3 +200,7 @@ https://deepzz.com/post/how-to-setup-ssh-config.html
 https://askubuntu.com/questions/48129/how-to-create-a-restricted-ssh-user-for-port-forwarding
 
 https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts
+
+https://datahunter.org/ssh_site2site_vpn
+
+https://wiki.archlinux.org/title/VPN_over_SSH

@@ -81,6 +81,22 @@ echo "exclude_file" >> .git/info/exclude
 
 
 
+
+
+**修改最后一次的提交**
+
+```
+git commit --amend
+```
+
+
+
+
+
+
+
+
+
 相关文章：
 
 https://deepzz.com/post/git-commands.html
