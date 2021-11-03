@@ -136,6 +136,14 @@ PasswordAuthentication no
 ```
 
 
+```
+Host 192.168.1.1 
+        HostName 192.168.1.1
+        User root
+        ProxyCommand ssh -q -W %h:%p wallet
+        RemoteForward 1080 localhost:1080
+```
+
 
 
 
